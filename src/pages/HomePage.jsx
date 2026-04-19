@@ -18,7 +18,7 @@ const HomePage = () => {
         .from('courses')
         .select('*')
         .order('created_at', { ascending: false })
-        .limit(6); // Show only 6 courses on homepage
+        .limit(6);
 
       if (error) throw error;
       setCourses(data || []);
@@ -107,8 +107,8 @@ const HomePage = () => {
           </div>
         </div>
 
-        {/* Available Courses Section - NEW */}
-        <div className="container mx-auto px-6 py-16 bg-gray-50">
+        {/* Available Courses Section */}
+        <div className="container mx-auto px-6 py-16">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-gray-900 mb-4">Available Courses</h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
@@ -124,7 +124,6 @@ const HomePage = () => {
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {courses.map((course) => (
                 <div key={course.id} className="bg-white rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden">
-                  {/* Status Badge */}
                   <div className={`px-4 py-2 text-sm font-medium ${
                     course.status === 'open' 
                       ? 'bg-green-50 text-green-700 border-b border-green-100' 
@@ -132,8 +131,6 @@ const HomePage = () => {
                   }`}>
                     {course.status === 'open' ? '🟢 Admissions Open' : '🔴 Admissions Closed'}
                   </div>
-                  
-                  {/* Course Content */}
                   <div className="p-5">
                     <div className="flex justify-between items-start mb-2">
                       <div>
@@ -142,15 +139,12 @@ const HomePage = () => {
                       </div>
                       <span className="text-lg font-bold text-blue-600">Rs {course.fee?.toLocaleString()}</span>
                     </div>
-                    
                     <p className="text-gray-600 text-sm mt-2 mb-3 line-clamp-2">
                       {course.description || 'No description available'}
                     </p>
-                    
                     <div className="flex items-center gap-2 text-sm text-gray-500 mb-4">
                       <span>⏱️ {course.duration || 'Not specified'}</span>
                     </div>
-                    
                     <Link to="/student-login">
                       <button className="w-full px-3 py-2 bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white rounded-lg text-sm font-medium transition-all duration-200">
                         Login to Apply
@@ -162,7 +156,6 @@ const HomePage = () => {
             </div>
           )}
 
-          {/* View All Courses Button */}
           <div className="text-center mt-10">
             <Link to="/student-login">
               <button className="px-6 py-3 border-2 border-blue-600 text-blue-600 hover:bg-blue-50 rounded-lg font-semibold transition-all duration-200">
@@ -186,6 +179,93 @@ const HomePage = () => {
             <div className="text-center p-6 bg-gradient-to-r from-blue-50 to-cyan-50 rounded-xl border border-blue-200">
               <div className="text-3xl font-bold text-blue-600 mb-2">100%</div>
               <div className="text-gray-700 font-semibold">Satisfaction Rate</div>
+            </div>
+          </div>
+        </div>
+
+        {/* Facebook Section - Moved to Last (Before Footer) */}
+        <div className="container mx-auto px-6 py-16 bg-gradient-to-r from-blue-50 to-cyan-50">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-8">
+            <div className="text-center md:text-left flex-1">
+              <div className="inline-flex items-center gap-2 mb-4">
+                <svg className="w-10 h-10 text-blue-600" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                </svg>
+                <h2 className="text-2xl md:text-3xl font-bold text-gray-900">Follow us on Facebook</h2>
+              </div>
+              <p className="text-gray-600 mb-6">
+                Stay updated with the latest news, course announcements, and events from SMIT.
+                Join our community of thousands of students and professionals.
+              </p>
+              <a 
+                href="https://www.facebook.com/saylani.smit/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white rounded-lg transition-all duration-200 font-semibold shadow-md"
+              >
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                </svg>
+                Like our Facebook Page
+              </a>
+            </div>
+            
+            {/* Facebook Page Embed */}
+            <div className="flex-1 w-full max-w-md">
+              <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200">
+                <div className="bg-gradient-to-r from-blue-600 to-cyan-600 p-4 text-white">
+                  <div className="flex items-center gap-3">
+                    <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center">
+                      <svg className="w-8 h-8 text-blue-600" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                      </svg>
+                    </div>
+                    <div>
+                      <h3 className="font-bold">SMIT - Saylani Mass IT Training</h3>
+                      <p className="text-sm text-blue-100">4.5M likes • 5M followers</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="p-4">
+                  <div className="space-y-3">
+                    <div className="flex items-start gap-3">
+                      <div className="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center">
+                        <span className="text-gray-600 font-bold">SMIT</span>
+                      </div>
+                      <div className="flex-1">
+                        <p className="text-sm font-semibold text-gray-900">SMIT Official</p>
+                        <p className="text-xs text-gray-500">2 hours ago</p>
+                        <p className="text-sm text-gray-700 mt-1">
+                          New batch of Web Development starting soon! Admissions are now open.
+                          Limited seats available. Register now!
+                        </p>
+                      </div>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <div className="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center">
+                        <span className="text-gray-600 font-bold">SMIT</span>
+                      </div>
+                      <div className="flex-1">
+                        <p className="text-sm font-semibold text-gray-900">SMIT Official</p>
+                        <p className="text-xs text-gray-500">1 day ago</p>
+                        <p className="text-sm text-gray-700 mt-1">
+                          Career counseling session this Saturday! Get guidance from industry experts.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="mt-4 pt-3 border-t border-gray-200">
+                    <a 
+                      href="https://www.facebook.com/saylani.smit/" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="text-blue-600 hover:text-blue-700 text-sm font-medium"
+                    >
+                      See more on Facebook →
+                    </a>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
